@@ -656,19 +656,6 @@ void choice()                                      //RECEIPTIONIST Choice
   gotoxy(79,d);
   cout<<"*";
  }
- struct tm *ptr;
- time_t t;
- t=time(NULL);
- char str[100];
- ptr=localtime(&t);
- gotoxy(7,3);
- strftime(str,100,"%A %B ",ptr);
- cout<<str<<ptr->tm_year+1900;
- gotoxy(11,4);
- cout<<ptr->tm_mday<<"-"<<ptr->tm_mon+1<<"-"<<ptr->tm_year+1900;
- gotoxy(30,4);
- strftime(str,100,"%I:%M %p",ptr);
- cout<<str;
  char choice[20][20];
  strcpy(choice[0],"CHECK IN");
  strcpy(choice[1],"ALL FACILITIES");
@@ -684,107 +671,130 @@ void choice()                                      //RECEIPTIONIST Choice
  ad();
  gotoxy(35,12);
  cout<<choice[x];
+ thetime:
+ struct tm *ptr;
+ time_t t;
+ t=time(NULL);
+ char str[100];
+ ptr=localtime(&t);
+ gotoxy(7,3);
+ strftime(str,100,"%A %B ",ptr);
+ cout<<str<<ptr->tm_year+1900;
+ gotoxy(11,4);
+ cout<<ptr->tm_mday<<"-"<<ptr->tm_mon+1<<"-"<<ptr->tm_year+1900;
+ gotoxy(30,4);
+ strftime(str,100,"%I:%M:%S %p",ptr);
+ cout<<str;
  w:
- gotoxy(33,12);
- cout<<"->";
- gotoxy(34,12);
- bb=getch();
- if(bb==52)
+  gotoxy(31,12);
+  cout<<"->>";
+ if(!kbhit())
  {
-  x--;
-  if(x<0)
-  {
-   ad();
-   x=7;
-   gotoxy(35,12);
-   cout<<choice[x];
-   goto w;
-  }
-  else
-  {
-   ad();
-   gotoxy(35,12);
-   cout<<choice[x];
-   goto w;
-  }
+  goto thetime;
  }
- else if(bb==54)
+ else
  {
-  x++;
-  if(x>7)
+  gotoxy(34,12);
+  bb=getch();
+  if(bb==52)
   {
-   ad();
-   x=0;
-   gotoxy(35,12);
-   cout<<choice[x];
-   goto w;
-  }
-  else
-  {
-   ad();
-   gotoxy(35,12);
-   cout<<choice[x];
-   goto w;
-  }
- }
- else if(bb=='s' || bb=='S')
- {
-  gotoxy(51,3);
-  char ser[10];
-  getch();
-  exit(0);
- }
- else if(bb==13)
- {
-  if(x==0)
-  {
-   int k;
-   long pos;
-   int check=0;
-   Room r;
-   int rno,sdate,edate,croom;
-   int smon,emon;
-   clrscr();
-   cout<<"Enter the room no        :";
-   cin>>rno;
-   if(rno<=120 && rno>=101)
+   x--;
+   if(x<0)
    {
-    cout<<"Enter the Starting Date :";
-    cin>>sdate;
-    cout<<"Enter the Ending Date   :";
-    cin>>edate;
-    cout<<"Enter the Starting Month:";
-    cin>>smon;
-    cout<<"Enter the Ending Month  :";
-    cin>>emon;
-    fstream file;
-    file.open("Roomchec.dat",ios::in | ios::out | ios::binary);
-    file.seekg(0);
-    while(file.read((char*)&r,sizeof(r)))
+    ad();
+    x=7;
+    gotoxy(35,12);
+    cout<<choice[x];
+    goto w;
+   }
+   else
+   {
+    ad();
+    gotoxy(35,12);
+    cout<<choice[x];
+    goto w;
+   }
+  }
+  else if(bb==54)
+  {
+   x++;
+   if(x>7)
+   {
+    ad();
+    x=0;
+    gotoxy(35,12);
+    cout<<choice[x];
+    goto w;
+   }
+   else
+   {
+    ad();
+    gotoxy(35,12);
+    cout<<choice[x];
+    goto w;
+   }
+  }
+  else if(bb=='s' || bb=='S')
+  {
+   char hh;
+   gotoxy(51,3);
+   char ser[10];
+   hh=getch();
+   if(hh==27)
+   goto thetime;
+   exit(0);
+  }
+   else if(bb==13)
+  {
+   if(x==0)
+   {
+    int k;
+    long pos;
+    int check=0;
+    Room r;
+    int rno,sdate,edate,croom;
+    int smon,emon;
+    clrscr();
+    cout<<"Enter the room no        :";
+    cin>>rno;
+    if(rno<=120 && rno>=101)
     {
-     pos=file.tellg();
-     if(rno==r.retroom())
+     cout<<"Enter the Starting Date :";
+     cin>>sdate;
+     cout<<"Enter the Ending Date   :";
+     cin>>edate;
+     cout<<"Enter the Starting Month:";
+     cin>>smon;
+     cout<<"Enter the Ending Month  :";
+     cin>>emon;
+     fstream file;
+     file.open("Roomchec.dat",ios::in | ios::out | ios::binary);
+     file.seekg(0);
+     while(file.read((char*)&r,sizeof(r)))
      {
-      cout<<"I'm in!"<<endl;
-      r.retddate();
-      if(sdate<edate)
+      pos=file.tellg();
+      if(rno==r.retroom())
       {
-       k=sdate;
-       while(k<=edate)
+       cout<<"I'm in!"<<endl;
+       r.retddate();
+       if(sdate<edate)
        {
+	k=sdate;
+	while(k<=edate)
+	{
 	if(cdate[smon][k]=='Y')
 	{
 	 check=1;
 	 break;
 	}
 	k++;
-       }
-       if(check==1)
-       {
+	}
+	if(check==1)
+	{
 	cout<<"That room is already taken";
-       }
-       else
-       {
+	}
+	else
+	{
 	cout<<"That is a good room for you!";
 	cout<<endl<<"Now you enter the details...";
 	getch();
@@ -792,36 +802,36 @@ void choice()                                      //RECEIPTIONIST Choice
 	r.getinfo(rno,sdate,edate,smon,emon);
 	file.seekp(pos-sizeof(r));
 	file.write((char*)&r,sizeof(r));
+	}
        }
-      }
-      if(sdate>edate)
-      {
-       k=1;
-       while(k<=edate)
+       if(sdate>edate)
        {
+	k=1;
+	while(k<=edate)
+	{
 	if(cdate[emon][k]=='Y')
 	{
 	 check=1;
 	 break;
 	}
 	k++;
-       }
-       k=sdate;
-       while(k<=31)
-       {
+	}
+	k=sdate;
+	while(k<=31)
+	{
 	if(cdate[smon][k]=='Y')
 	{
 	 check=1;
 	 break;
-       }
+	}
 	k++;
-       }
-       if(check==1)
-       {
+	}
+	if(check==1)
+	{
 	cout<<"That room is already taken";
-       }
-       else
-       {
+	}
+	else
+	{
 	cout<<"That is a good room for you!";
 	cout<<endl<<"Now you enter the details...";
 	getch();
@@ -829,68 +839,74 @@ void choice()                                      //RECEIPTIONIST Choice
 	r.getinfo(rno,sdate,edate,smon,emon);
 	file.seekp(pos-sizeof(r));
 	file.write((char*)&r,sizeof(r));
+	}
        }
+       if(sdate==edate)
+       {
+	cout<<"They both are same";
+       }
+       r.copyname(sdate,edate,smon,emon);
       }
-      if(sdate==edate)
-      {
-       cout<<"They both are same";
-      }
-      r.copyname(sdate,edate,smon,emon);
      }
     }
+    else
+    {
+     clrscr();
+     cout<<"Sorry that room does not exist!";
+     exit(0);
+    }
    }
-   else
+   if(x==1)
    {
-    clrscr();
-    cout<<"Sorry that room does not exist!";
-    exit(0);
    }
-  }
-  if(x==1)
-  {
-  }
-  if(x==2)
-  {
-  }
-  if(x==3)
-  {
-  }
-  if(x==4)
-  {
-  }
-  if(x==5)
-  {
-   randomize();
-   int j=0,k=0;
-   for(int i=0;i<14000;i++)
+   if(x==2)
    {
-    j=random(79+1);
-    k=random(25+1);
-    gotoxy(j,k);
-    cout<<"*";;
-    delay();
    }
-   goto first;
+   if(x==3)
+   {
+   }
+   if(x==4)
+   {
+   }
+   if(x==5)
+   {
+    randomize();
+    int j=0,k=0;
+    for(int i=0;i<14000;i++)
+    {
+     j=random(79+1);
+     k=random(25+1);
+     gotoxy(j,k);
+     cout<<"*";;
+     delay();
+    }
+    gotoxy(1,1);
+    for(i=0;i<1999;i++)
+    {
+     cout<<"*";;
+    }
+    goto first;
+   }
+   if(x==6)
+   {
+   }
+   if(x==7)
+   {
+   }
+   if(x==8)
+   {
+   }
   }
-  if(x==6)
+  else
   {
+   gotoxy(38,24);
+   cout<<"Not Possible";
+   stop();
+   stop();
+   gotoxy(38,24);
+   cout<<"            ";
+   goto w;
   }
-  if(x==7)
-  {
-  }
-  if(x==8)
-  {
-  }
+  exit(0);
  }
- else
- {
-  gotoxy(38,24);
-  cout<<"Not Possible";
-  stop();
-  stop();
-  gotoxy(38,24);
-  cout<<"            ";
-  goto w;
- }
- exit(0);
 }
