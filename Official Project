@@ -15,6 +15,47 @@ void check();
 void load();
 void choice();
 void ad();
+void Delay(long n)
+{
+ for(long x=0;x<n;x++)
+ {}
+}
+void PrintCircle(int centx , int centy)
+{
+	struct circval
+	{
+		int xpos;
+		int ypos;
+	};
+
+	circval values[]={{0,7},{1,7},{2,7},{3,7},{7,6},{9,5},{11,4},{12,3},{13,1},{13,0}};
+	int v,signx,signy,val;
+
+	for(int i=0;i<=1;i++)
+	{
+		signx=pow(-1,i);
+		for(int j=0;j<=1;j++)
+		{
+			signy=signx*pow(-1,j+1);
+			for(v=0;v<=9;v++)
+			{
+			  if(signx!=signy)
+				val=v;
+			  else if(signx==signy)
+				val=9-v;
+
+			  gotoxy(centx+signx*values[val].xpos,centy+signy*values[val].ypos);
+			  cout<<"*";
+			  Delay(5000000*pow(1.15,-signy*(9-val)));
+			  gotoxy(centx-signx*values[val].xpos,centy-signy*values[val].ypos);
+			  cout<<"";
+
+			}
+		}
+
+	}
+
+}
 void memselection();
 struct date
 {
@@ -568,26 +609,15 @@ void load()
    k++;
   }
  }
- stop();
- stop();
- stop();
  clrscr();
- gotoxy(35,12);
- cout<<"Loading...";
- stop();
- stop();
- stop();
- stop();
- stop();
- stop();
- clrscr();
+ int b=1;
  char a;
  gotoxy(1,23);
  for(i=0;i<80;i++)
  cout<<"_";
  gotoxy(1,24);
  cout<<"***************************|PRESS ENTER TO CONTINUE|***************************";
- while(a)
+ while(b)
  {
   if(kbhit())
   {
@@ -595,21 +625,19 @@ void load()
    if(a==13)
    break;
   }
+  if(b<5)
+  {
+   gotoxy(33,12);
+   cout<<"Loading...";
+   PrintCircle(38,12);
+  }
   else
   {
    gotoxy(33,12);
-   cout<<"**|Load Complete!|**";
-   slow();
-   slow();
-   slow();
-   slow();
-   gotoxy(33,12);
-   cout<<"                    ";
-   slow();
-   slow();
-   slow();
-   slow();
+   cout<<"System Loaded!";
+   PrintCircle(38,12);
   }
+  b++;
  }
 }
 void ad()
@@ -872,7 +900,7 @@ void choice()                                      //RECEIPTIONIST Choice
    {
     randomize();
     int j=0,k=0;
-    for(int i=0;i<14000;i++)
+    for(int i=0;i<10000;i++)
     {
      j=random(79+1);
      k=random(25+1);
@@ -885,6 +913,9 @@ void choice()                                      //RECEIPTIONIST Choice
     {
      cout<<"*";;
     }
+    stop();
+    stop();
+    stop();
     goto first;
    }
    if(x==6)
