@@ -689,7 +689,7 @@ void choice()                                      //RECEIPTIONIST Choice
  strcpy(choice[1],"ALL FACILITIES");
  strcpy(choice[2],"CHECK OUT");
  strcpy(choice[3],"MODIFY");
- strcpy(choice[4],"REPORTS");
+ strcpy(choice[4],"DISPLAY");
  strcpy(choice[5],"REFRESH");
  strcpy(choice[6],"CHANGE PASSWORD");
  strcpy(choice[7],"RESTART PROGRAM");
@@ -697,8 +697,27 @@ void choice()                                      //RECEIPTIONIST Choice
  int x=0;
  char bb;
  ad();
- gotoxy(35,12);
+ gotoxy(35,16);
  cout<<choice[x];
+ if(x==0)
+ {
+  gotoxy(35,8);
+ cout<<" _____   ";
+ gotoxy(35,9);
+ cout<<"| Add |  ";
+ gotoxy(35,10);
+ cout<<"| Rec |  ";
+ gotoxy(35,11);
+ cout<<"|     |  ";
+ gotoxy(35,12);
+ cout<<"|     |  ";
+ gotoxy(35,13);
+ cout<<"|     +  ";
+ gotoxy(35,14);
+ cout<<"|___+ + +";
+ gotoxy(35,15);
+ cout<<"      +  ";
+ }
  thetime:
  struct tm *ptr;
  time_t t;
@@ -714,7 +733,7 @@ void choice()                                      //RECEIPTIONIST Choice
  strftime(str,100,"%I:%M:%S %p",ptr);
  cout<<str;
  w:
-  gotoxy(31,12);
+  gotoxy(31,16);
   cout<<"->>";
  if(!kbhit())
  {
@@ -722,7 +741,7 @@ void choice()                                      //RECEIPTIONIST Choice
  }
  else
  {
-  gotoxy(34,12);
+  gotoxy(34,16);
   bb=getch();
   if(bb==52)
   {
@@ -731,15 +750,323 @@ void choice()                                      //RECEIPTIONIST Choice
    {
     ad();
     x=7;
-    gotoxy(35,12);
+    gotoxy(35,16);
     cout<<choice[x];
+    if(x==0)
+    {
+	 gotoxy(35,8);
+	cout<<" _____   ";
+	gotoxy(35,9);
+	cout<<"| Add |  ";
+	gotoxy(35,10);
+	cout<<"| Rec |  ";
+	gotoxy(35,11);
+	cout<<"|     |  ";
+	gotoxy(35,12);
+	cout<<"|     |  ";
+	gotoxy(35,13);
+	cout<<"|     +  ";
+	gotoxy(35,14);
+	cout<<"|___+ + +";
+	gotoxy(35,15);
+	cout<<"      +  ";
+
+    }
+    if(x==2)
+    {
+	gotoxy(35,8);
+	cout<<" _____    ";
+	gotoxy(35,9);
+	cout<<"| Del |   ";
+	gotoxy(35,10);
+	cout<<"| Rec |   ";
+	gotoxy(35,11);
+	cout<<"|     |   ";
+	gotoxy(35,12);
+	cout<<"|     |   ";
+	gotoxy(35,13);
+	cout<<"|     |   ";
+	gotoxy(35,14);
+	cout<<"|     |   ";
+	gotoxy(35,15);
+	cout<<"|___----- ";
+    }
+    if(x==1)
+    {
+	gotoxy(35,8);
+	cout<<" ______   ";
+	gotoxy(35,9);
+	cout<<"| FAC. |  ";
+	gotoxy(35,10);
+	cout<<"|*.... |  ";
+	gotoxy(35,11);
+	cout<<"|*.... |  ";
+	gotoxy(35,12);
+	cout<<"|*... ??  ";
+	gotoxy(35,13);
+	cout<<"|*...?  ? ";
+	gotoxy(35,14);
+	cout<<"|_____ ?  ";
+	gotoxy(35,15);
+	cout<<"       *  ";
+
+    }
+    if(x==3)
+    {
+	gotoxy(35,8);
+	cout<<" ______    ";
+	gotoxy(35,9);
+	cout<<"| MOD. |   ";
+	gotoxy(35,10);
+	cout<<"| REC. |   ";
+	gotoxy(35,11);
+	cout<<"|      |   ";
+	gotoxy(35,12);
+	cout<<"|      /~/ ";
+	gotoxy(35,13);
+	cout<<"|     / /  ";
+	gotoxy(35,14);
+	cout<<"|____/ /   ";
+	gotoxy(35,15);
+	cout<<"     L/    ";
+
+    }
+    if(x==4)
+    {
+	gotoxy(35,8);
+	cout<<" _____ ";
+	gotoxy(35,9);
+	cout<<"|*....|";
+	gotoxy(35,10);
+	cout<<"|*....|";
+	gotoxy(35,11);
+	cout<<"|*....|";
+	gotoxy(35,12);
+	cout<<"|*....|";
+	gotoxy(35,13);
+	cout<<"|*....|";
+	gotoxy(35,14);
+	cout<<"|*....|";
+	gotoxy(35,15);
+	cout<<"|_____|";
+    }
+    if(x==5)
+    {
+	gotoxy(35,8);
+	cout<<" ______    ";
+	gotoxy(35,9);
+	cout<<"|*.... |   ";
+	gotoxy(35,10);
+	cout<<"|*.... |   ";
+	gotoxy(35,11);
+	cout<<"|*.... |   ";
+	gotoxy(35,12);
+	cout<<"|*.. .>.   ";
+	gotoxy(35,13);
+	cout<<"|*. '   '  ";
+	gotoxy(35,14);
+	cout<<"|___'   '  ";
+	gotoxy(35,15);
+	cout<<"     '<'   ";
+    }
+    if(x==6)
+    {
+	gotoxy(35,8);
+	cout<<"   ********* ";
+	gotoxy(35,9);
+	cout<<"   *CHANGE * ";
+	gotoxy(35,10);
+	cout<<"    * PASS*  ";
+	gotoxy(35,11);
+	cout<<"     *...*   ";
+	gotoxy(35,12);
+	cout<<"       T     ";
+	gotoxy(35,13);
+	cout<<"       I     ";
+	gotoxy(35,14);
+	cout<<"       I     ";
+	gotoxy(35,15);
+	cout<<"       !     ";
+
+    }
+    if(x==7)
+    {
+	 gotoxy(35,9);
+	 cout<<"   <Restart<   ";
+	 gotoxy(35,10);
+	 cout<<" \\/        /\\ ";
+	 gotoxy(35,11);
+	 cout<<" \\/        /\\ ";
+	 gotoxy(35,12);
+	 cout<<"  >>>>>>>>>>  ";
+    }
+    if(x==8)
+    {
+    }
+    if(x==9)
+    {
+    }
     goto w;
    }
    else
    {
     ad();
-    gotoxy(35,12);
+    gotoxy(35,16);
     cout<<choice[x];
+    if(x==0)
+    {
+	gotoxy(35,8);
+	cout<<" _____   ";
+	gotoxy(35,9);
+	cout<<"| Add |  ";
+	gotoxy(35,10);
+	cout<<"| Rec |  ";
+	gotoxy(35,11);
+	cout<<"|     |  ";
+	gotoxy(35,12);
+	cout<<"|     |  ";
+	gotoxy(35,13);
+	cout<<"|     +  ";
+	gotoxy(35,14);
+	cout<<"|___+ + +";
+	gotoxy(35,15);
+	cout<<"      +  ";
+
+    }
+    if(x==2)
+    {
+    gotoxy(35,8);
+	cout<<" _____    ";
+	gotoxy(35,9);
+	cout<<"| Del |   ";
+	gotoxy(35,10);
+	cout<<"| Rec |   ";
+	gotoxy(35,11);
+	cout<<"|     |   ";
+	gotoxy(35,12);
+	cout<<"|     |   ";
+	gotoxy(35,13);
+	cout<<"|     |   ";
+	gotoxy(35,14);
+	cout<<"|     |   ";
+	gotoxy(35,15);
+	cout<<"|___----- ";
+    }
+    if(x==1)
+    {
+    gotoxy(35,8);
+	cout<<" ______   ";
+	gotoxy(35,9);
+	cout<<"| FAC. |  ";
+	gotoxy(35,10);
+	cout<<"|*.... |  ";
+	gotoxy(35,11);
+	cout<<"|*.... |  ";
+	gotoxy(35,12);
+	cout<<"|*... ??  ";
+	gotoxy(35,13);
+	cout<<"|*...?  ? ";
+	gotoxy(35,14);
+	cout<<"|_____ ?  ";
+	gotoxy(35,15);
+	cout<<"       *  ";
+
+    }
+    if(x==3)
+    {
+	gotoxy(35,8);
+	cout<<" ______    ";
+	gotoxy(35,9);
+	cout<<"| MOD. |   ";
+	gotoxy(35,10);
+	cout<<"| REC. |   ";
+	gotoxy(35,11);
+	cout<<"|      |   ";
+	gotoxy(35,12);
+	cout<<"|      /~/ ";
+	gotoxy(35,13);
+	cout<<"|     / /  ";
+	gotoxy(35,14);
+	cout<<"|____/ /   ";
+	gotoxy(35,15);
+	cout<<"     L/    ";
+
+    }
+    if(x==4)
+    {
+	gotoxy(35,8);
+	cout<<" _____ ";
+	gotoxy(35,9);
+	cout<<"|*....|";
+	gotoxy(35,10);
+	cout<<"|*....|";
+	gotoxy(35,11);
+	cout<<"|*....|";
+	gotoxy(35,12);
+	cout<<"|*....|";
+	gotoxy(35,13);
+	cout<<"|*....|";
+	gotoxy(35,14);
+	cout<<"|*....|";
+	gotoxy(35,15);
+	cout<<"|_____|";
+    }
+    if(x==5)
+    {
+    gotoxy(35,8);
+	cout<<" ______    ";
+	gotoxy(35,9);
+	cout<<"|*.... |   ";
+	gotoxy(35,10);
+	cout<<"|*.... |   ";
+	gotoxy(35,11);
+	cout<<"|*.... |   ";
+	gotoxy(35,12);
+	cout<<"|*.. .>.   ";
+	gotoxy(35,13);
+	cout<<"|*. '   '  ";
+	gotoxy(35,14);
+	cout<<"|___'   '  ";
+	gotoxy(35,15);
+	cout<<"     '<'   ";
+    }
+    if(x==6)
+    {
+    gotoxy(35,8);
+	cout<<"   ********* ";
+	gotoxy(35,9);
+	cout<<"   *CHANGE * ";
+	gotoxy(35,10);
+	cout<<"    * PASS*  ";
+	gotoxy(35,11);
+	cout<<"     *...*   ";
+	gotoxy(35,12);
+	cout<<"       T     ";
+	gotoxy(35,13);
+	cout<<"       I     ";
+	gotoxy(35,14);
+	cout<<"       I     ";
+	gotoxy(35,15);
+	cout<<"       !     ";
+    }
+    if(x==7)
+    {
+    gotoxy(35,9);
+	 cout<<"   <Restart<   ";
+	 gotoxy(35,10);
+	 cout<<" \\/        /\\ ";
+	 gotoxy(35,11);
+	 cout<<" \\/        /\\ ";
+	 gotoxy(35,12);
+	 cout<<"  >>>>>>>>>>  ";
+
+    }
+    if(x==8)
+    {
+    }
+    if(x==9)
+    {
+    }
     goto w;
    }
   }
@@ -750,15 +1077,324 @@ void choice()                                      //RECEIPTIONIST Choice
    {
     ad();
     x=0;
-    gotoxy(35,12);
+    gotoxy(35,16);
     cout<<choice[x];
+    if(x==0)
+    {
+	gotoxy(35,8);
+	cout<<" _____   ";
+	gotoxy(35,9);
+	cout<<"| Add |  ";
+	gotoxy(35,10);
+	cout<<"| Rec |  ";
+	gotoxy(35,11);
+	cout<<"|     |  ";
+	gotoxy(35,12);
+	cout<<"|     |  ";
+	gotoxy(35,13);
+	cout<<"|     +  ";
+	gotoxy(35,14);
+	cout<<"|___+ + +";
+	gotoxy(35,15);
+	cout<<"      +  ";
+
+    }
+    if(x==2)
+    {
+    gotoxy(35,8);
+	cout<<" _____    ";
+	gotoxy(35,9);
+	cout<<"| Del |   ";
+	gotoxy(35,10);
+	cout<<"| Rec |   ";
+	gotoxy(35,11);
+	cout<<"|     |   ";
+	gotoxy(35,12);
+	cout<<"|     |   ";
+	gotoxy(35,13);
+	cout<<"|     |   ";
+	gotoxy(35,14);
+	cout<<"|     |   ";
+	gotoxy(35,15);
+	cout<<"|___----- ";
+    }
+    if(x==1)
+    {
+    gotoxy(35,8);
+	cout<<" ______   ";
+	gotoxy(35,9);
+	cout<<"| FAC. |  ";
+	gotoxy(35,10);
+	cout<<"|*.... |  ";
+	gotoxy(35,11);
+	cout<<"|*.... |  ";
+	gotoxy(35,12);
+	cout<<"|*... ??  ";
+	gotoxy(35,13);
+	cout<<"|*...?  ? ";
+	gotoxy(35,14);
+	cout<<"|_____ ?  ";
+	gotoxy(35,15);
+	cout<<"       *  ";
+
+    }
+    if(x==3)
+    {
+    gotoxy(35,8);
+	cout<<" ______    ";
+	gotoxy(35,9);
+	cout<<"| MOD. |   ";
+	gotoxy(35,10);
+	cout<<"| REC. |   ";
+	gotoxy(35,11);
+	cout<<"|      |   ";
+	gotoxy(35,12);
+	cout<<"|      /~/ ";
+	gotoxy(35,13);
+	cout<<"|     / /  ";
+	gotoxy(35,14);
+	cout<<"|____/ /   ";
+	gotoxy(35,15);
+	cout<<"     L/    ";
+
+    }
+    if(x==4)
+    {
+	gotoxy(35,8);
+	cout<<" _____ ";
+	gotoxy(35,9);
+	cout<<"|*....|";
+	gotoxy(35,10);
+	cout<<"|*....|";
+	gotoxy(35,11);
+	cout<<"|*....|";
+	gotoxy(35,12);
+	cout<<"|*....|";
+	gotoxy(35,13);
+	cout<<"|*....|";
+	gotoxy(35,14);
+	cout<<"|*....|";
+	gotoxy(35,15);
+	cout<<"|_____|";
+    }
+    if(x==5)
+    {
+    gotoxy(35,8);
+	cout<<" ______    ";
+	gotoxy(35,9);
+	cout<<"|*.... |   ";
+	gotoxy(35,10);
+	cout<<"|*.... |   ";
+	gotoxy(35,11);
+	cout<<"|*.... |   ";
+	gotoxy(35,12);
+	cout<<"|*.. .>.   ";
+	gotoxy(35,13);
+	cout<<"|*. '   '  ";
+	gotoxy(35,14);
+	cout<<"|___'   '  ";
+	gotoxy(35,15);
+	cout<<"     '<'   ";
+    }
+    if(x==6)
+    {
+    gotoxy(35,8);
+	cout<<"   ********* ";
+	gotoxy(35,9);
+	cout<<"   *CHANGE * ";
+	gotoxy(35,10);
+	cout<<"    * PASS*  ";
+	gotoxy(35,11);
+	cout<<"     *...*   ";
+	gotoxy(35,12);
+	cout<<"       T     ";
+	gotoxy(35,13);
+	cout<<"       I     ";
+	gotoxy(35,14);
+	cout<<"       I     ";
+	gotoxy(35,15);
+	cout<<"       !     ";
+    }
+    if(x==7)
+    {
+    gotoxy(35,9);
+	 cout<<"   <Restart<   ";
+	 gotoxy(35,10);
+	 cout<<" \\/        /\\ ";
+	 gotoxy(35,11);
+	 cout<<" \\/        /\\ ";
+	 gotoxy(35,12);
+	 cout<<"  >>>>>>>>>>  ";
+
+    }
+    if(x==8)
+    {
+    }
+    if(x==9)
+    {
+    }
     goto w;
    }
    else
    {
     ad();
-    gotoxy(35,12);
+    gotoxy(35,16);
     cout<<choice[x];
+    if(x==0)
+    {
+	gotoxy(35,8);
+	cout<<" _____   ";
+	gotoxy(35,9);
+	cout<<"| Add |  ";
+	gotoxy(35,10);
+	cout<<"| Rec |  ";
+	gotoxy(35,11);
+	cout<<"|     |  ";
+	gotoxy(35,12);
+	cout<<"|     |  ";
+	gotoxy(35,13);
+	cout<<"|     +  ";
+	gotoxy(35,14);
+	cout<<"|___+ + +";
+	gotoxy(35,15);
+	cout<<"      +  ";
+
+
+    }
+    if(x==2)
+    {
+	gotoxy(35,8);
+	cout<<" _____    ";
+	gotoxy(35,9);
+	cout<<"| Del |   ";
+	gotoxy(35,10);
+	cout<<"| Rec |   ";
+	gotoxy(35,11);
+	cout<<"|     |   ";
+	gotoxy(35,12);
+	cout<<"|     |   ";
+	gotoxy(35,13);
+	cout<<"|     |   ";
+	gotoxy(35,14);
+	cout<<"|     |   ";
+	gotoxy(35,15);
+	cout<<"|___----- ";
+    }
+    if(x==1)
+    {
+    gotoxy(35,8);
+	cout<<" ______   ";
+	gotoxy(35,9);
+	cout<<"| FAC. |  ";
+	gotoxy(35,10);
+	cout<<"|*.... |  ";
+	gotoxy(35,11);
+	cout<<"|*.... |  ";
+	gotoxy(35,12);
+	cout<<"|*... ??  ";
+	gotoxy(35,13);
+	cout<<"|*...?  ? ";
+	gotoxy(35,14);
+	cout<<"|_____ ?  ";
+	gotoxy(35,15);
+	cout<<"       *  ";
+
+    }
+    if(x==3)
+    {
+	gotoxy(35,8);
+	cout<<" ______    ";
+	gotoxy(35,9);
+	cout<<"| MOD. |   ";
+	gotoxy(35,10);
+	cout<<"| REC. |   ";
+	gotoxy(35,11);
+	cout<<"|      |   ";
+	gotoxy(35,12);
+	cout<<"|      /~/ ";
+	gotoxy(35,13);
+	cout<<"|     / /  ";
+	gotoxy(35,14);
+	cout<<"|____/ /   ";
+	gotoxy(35,15);
+	cout<<"     L/    ";
+
+    }
+    if(x==4)
+    {
+	gotoxy(35,8);
+	cout<<" _____ ";
+	gotoxy(35,9);
+	cout<<"|*....|";
+	gotoxy(35,10);
+	cout<<"|*....|";
+	gotoxy(35,11);
+	cout<<"|*....|";
+	gotoxy(35,12);
+	cout<<"|*....|";
+	gotoxy(35,13);
+	cout<<"|*....|";
+	gotoxy(35,14);
+	cout<<"|*....|";
+	gotoxy(35,15);
+	cout<<"|_____|";
+    }
+    if(x==5)
+    {
+	gotoxy(35,8);
+	cout<<" ______    ";
+	gotoxy(35,9);
+	cout<<"|*.... |   ";
+	gotoxy(35,10);
+	cout<<"|*.... |   ";
+	gotoxy(35,11);
+	cout<<"|*.... |   ";
+	gotoxy(35,12);
+	cout<<"|*.. .>.   ";
+	gotoxy(35,13);
+	cout<<"|*. '   '  ";
+	gotoxy(35,14);
+	cout<<"|___'   '  ";
+	gotoxy(35,15);
+	cout<<"     '<'   ";
+    }
+    if(x==6)
+    {
+    gotoxy(35,8);
+	cout<<"   ********* ";
+	gotoxy(35,9);
+	cout<<"   *CHANGE * ";
+	gotoxy(35,10);
+	cout<<"    * PASS*  ";
+	gotoxy(35,11);
+	cout<<"     *...*   ";
+	gotoxy(35,12);
+	cout<<"       T     ";
+	gotoxy(35,13);
+	cout<<"       I     ";
+	gotoxy(35,14);
+	cout<<"       I     ";
+	gotoxy(35,15);
+	cout<<"       !     ";
+    }
+    if(x==7)
+    {
+    gotoxy(35,9);
+	 cout<<"    <Restart<   ";
+	 gotoxy(35,10);
+	 cout<<" \\/        /\\ ";
+	 gotoxy(35,11);
+	 cout<<" \\/        /\\ ";
+	 gotoxy(35,12);
+	 cout<<"  >>>>>>>>>>  ";
+
+    }
+    if(x==8)
+    {
+    }
+    if(x==9)
+    {
+    }
     goto w;
    }
   }
@@ -787,26 +1423,26 @@ void choice()                                      //RECEIPTIONIST Choice
     cin>>rno;
     if(rno<=120 && rno>=101)
     {
-     cout<<"Enter the Starting Date :";
-     cin>>sdate;
-     cout<<"Enter the Ending Date   :";
-     cin>>edate;
-     cout<<"Enter the Starting Month:";
-     cin>>smon;
-     cout<<"Enter the Ending Month  :";
-     cin>>emon;
-     fstream file;
-     file.open("Roomchec.dat",ios::in | ios::out | ios::binary);
-     file.seekg(0);
-     while(file.read((char*)&r,sizeof(r)))
-     {
-      pos=file.tellg();
-      if(rno==r.retroom())
-      {
-       cout<<"I'm in!"<<endl;
-       r.retddate();
-       if(sdate<edate)
-       {
+	cout<<"Enter the Starting Date :";
+	cin>>sdate;
+	cout<<"Enter the Ending Date   :";
+	cin>>edate;
+	cout<<"Enter the Starting Month:";
+	cin>>smon;
+	cout<<"Enter the Ending Month  :";
+	cin>>emon;
+	fstream file;
+	file.open("Roomchec.dat",ios::in | ios::out | ios::binary);
+	file.seekg(0);
+	while(file.read((char*)&r,sizeof(r)))
+	{
+	 pos=file.tellg();
+	 if(rno==r.retroom())
+	 {
+	  cout<<"I'm in!"<<endl;
+	  r.retddate();
+	  if(sdate<edate)
+	  {
 	k=sdate;
 	while(k<=edate)
 	{
