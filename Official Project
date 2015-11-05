@@ -11,6 +11,7 @@ int m=4;
 #include<ctype.h>
 #include<process.h>
 #include<string.h>
+void Custdata();
 void check();
 void load();
 void choice();
@@ -220,6 +221,7 @@ struct date
 }D;
 void reset()
 {
+ remove("Cdata.dat");
  fstream fileD;
  fileD.open("Ddata.dat",ios::out | ios::in | ios::binary);
  int k=101;
@@ -245,7 +247,7 @@ void show()
    {
 		for(int j=0;j<31;j++)
     {
-     cout<<D.mon[i][j];
+	cout<<D.mon[i][j];
     }
 		cout<<endl;
 	 }
@@ -277,12 +279,34 @@ class Customer
  char gender;
  char nation[20];
  long phno;
+ char pass[20];
  int nomember;
 
  public:
+	char* retpass()
+	{
+	 return pass;
+	}
+	char* retname()
+	{
+	 return cfname;
+	}
 	int retroom();
 	void retddate();
 	void getinfo(int,int,int,int,int);
+	void dispdata(int y)
+	{
+	 gotoxy(1,y);
+	 cout<<cfname<<" "<<clname;
+	 gotoxy(33,y);
+	 cout<<gender;
+	 gotoxy(43,y);
+	 cout<<sdate+1<<'/'<<smon+1<<'-'<<edate+1<<'/'<<emon+1;
+	 gotoxy(61,y);
+	 cout<<tot_fare;
+	 gotoxy(73,y);
+	 cout<<nomember;
+	}
 }C;
 int Customer::retroom()
 {
@@ -310,6 +334,8 @@ void Customer::getinfo(int rno,int sdate1,int edate1,int smon1,int emon1)
  cout<<"Enter the Nationality              :";
  gotoxy(1,13);
  cout<<"Enter the Phone number             :";
+ gotoxy(1,15);
+ cout<<"Enter the password                 :";
  gotoxy(37,3);
  gets(cfname);
  gotoxy(37,5);
@@ -325,6 +351,8 @@ void Customer::getinfo(int rno,int sdate1,int edate1,int smon1,int emon1)
 	gets(nation);
 	gotoxy(37,13);
 	cin>>phno;
+	gotoxy(37,15);
+	gets(pass);
 	ifstream fileR;
 	fileR.open("Rdata.dat",ios::in | ios::binary);
 	while(fileR.read((char*)&R,sizeof(R)))
@@ -442,7 +470,7 @@ void login()
     {
      if(i==40 || i==41 || i==42 || i==44 || i==45 || i==46)
 		 {
-      cout<<"";
+	 cout<<"";
      }
     }
     if(j==9)
@@ -450,10 +478,10 @@ void login()
      if(i==39 || i==40 || i==41 || i==42 || i==44 || i==45 || i==46)
 		 {
 			cout<<" ";
-     }
+	}
 		 if(i==57 || i==58 || i==59 || i==60 || i==61 || i==62)
-     {
-      cout<<"";
+	{
+	 cout<<"";
 		 }
      else
      cout<<" ";
@@ -465,7 +493,7 @@ void login()
    {
 		if(i==24 || i==30 || i==32 || i==38 || i==43 || i==48 || i==56)
     {
-     cout<<"";
+	cout<<"";
 		}
     else
     cout<<" ";
@@ -570,49 +598,57 @@ void entry()
  cout<<"PLEASE LOGIN"<<endl;
  stop();
  stop();
- gotoxy(15,12);
+ gotoxy(10,12);
  cout<<"CUSTOMER";
  gotoxy(30,12);
  cout<<"RECEIPTIONIST";
- gotoxy(45,12);
+ gotoxy(50,12);
  cout<<"ADMIN";
- gotoxy(60,12);
+ gotoxy(70,12);
  cout<<"EXIT";
  char ch;
- int k=15;
+ int k=10;
  again:
  gotoxy(k-2,12);
  cout<<">>";
  ch=getch();
- if(ch=='D')
+ if(ch=='D' || ch=='d')
  {
-	k=k+30;
-	if(k>60)
+	k=k+20;
+	if(k>70)
 	{
-	 k=60;
+	 k=10;
+	 gotoxy(68,12);
+	 cout<<"  ";
 	 goto again;
 	}
 	else
 	{
-	 gotoxy(k-32,12);
-	 cout<<" ";
+	 gotoxy(k-22,12);
+	 cout<<"  ";
 	 goto again;
 	}
  }
- if(ch=='A')
+ if(ch=='A' || ch=='a')
  {
-	k=k-30;
-	if(k<15)
+	k=k-20;
+	if(k<10)
 	{
-	 k=30;
+	 k=70;
+	 gotoxy(8,12);
+	 cout<<"  ";
 	 goto again;
 	}
 	else
 	{
-	 gotoxy(k+32,12);
-	 cout<<" ";
+	 gotoxy(k+18,12);
+	 cout<<"  ";
 	 goto again;
 	}
+ }
+ if(ch==13)
+ {
+  goto bleh;
  }
  else
  {
@@ -623,7 +659,9 @@ void entry()
 	cout<<"             ";
 	goto again;
  }
- char user[20],pass[20],ch;
+ bleh:
+ clrscr();
+ char user[20],pass[20];
  back:
  gotoxy(53,9);
  cout<<" ----------------------- ";
@@ -649,7 +687,7 @@ void entry()
  cout<<"PASSWORD: ";
  gotoxy(65,13);
  cout<<"          ";
- int k=65;
+ k=65;
  gotoxy(k,11);
  for(i=0;i<11;i++)
  {
@@ -720,36 +758,49 @@ void entry()
 	 break;
 	}
  }
- if(k==30)
- {
 	if(strcmpi("agje",user)==0 && strcmp(newpass,pass)==0)
 	{
 	 load();
 	 choice();
 	}
- }
- if(k==
- if(strcmpi("agje",user)==0 && strcmp(pass,"fast")==0)
- {
-	choice();
- }
- if(strcmpi("agje",user)==0 && strcmp(pass,"reset")==0)
- {
-	reset();
-	load();
-	choice();
- }
- if(strcmpi("admin",user)==0 && strcmp("admin",pass)==0)
- {
-  clrscr();
-  cout<<"The the admin choice function is under construction";
- }
+	if(strcmpi("agje",user)==0 && strcmp(pass,"fast")==0)
+	{
+		choice();
+	}
+	if(strcmpi("agje",user)==0 && strcmp(pass,"reset")==0)
+	{
+		reset();
+		load();
+		choice();
+	}
+	if(strcmpi("admin",user)==0 && strcmp("admin",pass)==0)
+	{
+		clrscr();
+		cout<<"The the admin choice function is under construction";
+	}
+	int found=0;
+	fstream file1;
+	file1.open("Cdata.dat",ios::in | ios::out | ios::binary);
+	while(file1.read((char*)&C,sizeof(C)))
+	{
+	 if(strcmpi(user,C.retname())==0 && strcmpi(pass,C.retpass())==0)
+	 {
+	  found=1;
+	  Custdata();
+	  exit(0);
+	 }
+	}
+	if(found==0)
+	{
+	 cout<<"Customer Not Found!";
+	 goto bleh;
+	}
  else
  {
-  m--;
+	m--;
 	for(int w=2;w<20;w++)
 	for(int z=10;z<18;z++)
-  {
+	{
 	 gotoxy(w,z);
 	 cout<<" ";
   }
@@ -829,7 +880,7 @@ void entry()
 }
 void main()                                                        //The main
 {
- login();
+ //login();
  entry();
 }
 void load()
@@ -1106,7 +1157,10 @@ void choice()                                      //RECEIPTIONIST Choice
 			 }
 			 if(check==1)
 			 {
+				gotoxy(32,24);
 				cout<<"That Room is already Booked";
+				getch();
+				goto first;
 			 }
 			 else
 			 {
@@ -1196,7 +1250,10 @@ void choice()                                      //RECEIPTIONIST Choice
 			 }
 			 if(check==1)
 			 {
-				cout<<"That room is already Booked";
+				gotoxy(32,24);
+				cout<<"That Room is already Booked";
+				getch();
+				goto first;
 			 }
 			 else
 			 {
@@ -1323,7 +1380,6 @@ void choice()                                      //RECEIPTIONIST Choice
 	 }
 	 if(x==1)
 	 {
-		goto first;
 	 }
 	 if(x==2)
 	 {
@@ -1331,26 +1387,67 @@ void choice()                                      //RECEIPTIONIST Choice
 	 }
 	 if(x==3)
 	 {
-		goto first;
 	 }
 	 if(x==4)
 	 {
+	  clrscr();
+	  ifstream file;
+	  file.open("Cdata.dat",ios::in | ios::binary);
+	  gotoxy(8,1);
+	  cout<<"NAME ";
+	  gotoxy(30,1);
+	  cout<<"GENDER";
+	  gotoxy(46,1);
+	  cout<<"DATE";
+	  gotoxy(59,1);
+	  cout<<"AMOUNT";
+	  gotoxy(70,1);
+	  cout<<"MEMBERS";
+	  int y=2,z=0;
+	  char k;
+	  while(file.read((char*)&C,sizeof(C)))
+	  {
+	   if(y-1<21)
+	   C.dispdata(y++);
+	   else
+	   {
+	    k=getch();
+	    if(k=='s' || k=='S')
+	    {
 		clrscr();
-		goto first;
+		z++;
+		y=2;
+		clrscr();
+		C.dispdata(y++);
+	    }
+	    else if(k=='w' || k=='W')
+	    {
+		if(z>0)
+		{
+		 clrscr();
+		 z++;
+		 y=2;
+		 C.dispdata(y++);
+		}
+	    }
+	   }
+	  }
+	  getch();
+	  goto first;
 	 }
 	 if(x==5)
 	 {
-		randomize();
-		int j=0,k=0;
-		for(int i=0;i<10000;i++)
-    {
-     j=random(79+1);
-     k=random(25+1);
-     gotoxy(j,k);
-     cout<<"*";;
-     delay();
-    }
-    gotoxy(1,1);
+	  randomize();
+	  int j=0,k=0;
+	  for(int i=0;i<10000;i++)
+	  {
+		j=random(79+1);
+		k=random(25+1);
+		gotoxy(j,k);
+		cout<<"*";;
+		delay();
+	  }
+	  gotoxy(1,1);
 		for(i=0;i<1999;i++)
     {
 		 cout<<"*";;
@@ -1360,7 +1457,7 @@ void choice()                                      //RECEIPTIONIST Choice
 		stop();
 		goto first;
 	 }
-   if(x==6)
+	 if(x==6)
 	 {
 		goto first;
 	 }
@@ -1385,4 +1482,11 @@ void choice()                                      //RECEIPTIONIST Choice
   }
   exit(0);
  }
+}
+void Custdata()
+{
+ clrscr();
+ getch();
+  cout<<"correct! But sorry its under construction!";
+  getch();
 }
