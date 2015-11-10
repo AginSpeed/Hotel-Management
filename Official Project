@@ -1351,10 +1351,8 @@ void choice()                                      //RECEIPTIONIST Choice
 			 if(check==0)
 			 {
 				cout<<"That is a good room for you ";
+				getch();
 				cdate[smon][sdate]='Y';
-				for(int i=0;i<12;i++)
-				for(int j=0;j<31;j++)
-				D.mon[i][j]=cdate[i][j];
 
 				clrscr();
 				ofstream fileC;
@@ -1370,6 +1368,9 @@ void choice()                                      //RECEIPTIONIST Choice
 				{
 				 fileC.write((char*)&C,sizeof(C));
 				 fileD.seekp(pos-sizeof(D));
+				 for(int i=0;i<12;i++)
+				 for(int j=0;j<31;j++)
+				 D.mon[i][j]=cdate[i][j];
 				 fileD.write((char*)&D,sizeof(D));
 				 getch();
 				 goto first;
@@ -1412,7 +1413,7 @@ void choice()                                      //RECEIPTIONIST Choice
 	  clrscr();
 	  ifstream file;
 		file.open("Cdata.dat",ios::in | ios::binary);
-	  gotoxy(8,1);
+		gotoxy(8,1);
 	  cout<<"NAME ";
 	  gotoxy(30,1);
 	  cout<<"GENDER";
@@ -1420,7 +1421,7 @@ void choice()                                      //RECEIPTIONIST Choice
 		cout<<"DATE";
 	  gotoxy(59,1);
 	  cout<<"AMOUNT";
-	  gotoxy(70,1);
+		gotoxy(70,1);
 		cout<<"MEMBERS";
 	  int y=3,z=0;
 	  char k;
@@ -1452,7 +1453,7 @@ void choice()                                      //RECEIPTIONIST Choice
 		}
 	    }
 		 }
-	  }
+		}
 	  getch();
 	  goto first;
 	 }
@@ -1460,7 +1461,7 @@ void choice()                                      //RECEIPTIONIST Choice
 	 {
 	  randomize();
 	  int j=0,k=0;
-	  for(int i=0;i<10000;i++)
+		for(int i=0;i<10000;i++)
 		{
 		j=random(79+1);
 		k=random(25+1);
@@ -1500,7 +1501,7 @@ void choice()                                      //RECEIPTIONIST Choice
 	 gotoxy(38,24);
 	 cout<<"            ";
 	 goto w;
-  }
+	}
 	exit(0);
  }
 }
@@ -1508,8 +1509,8 @@ void Custdata()
 {
  clrscr();
  getch();
-  cout<<"correct! But sorry its under construction!";
-  getch();
+ cout<<"correct! But sorry its under construction!";
+ getch();
 }
 void reset()
 {
@@ -1518,18 +1519,135 @@ void reset()
  remove("done.dat");
  remove("SEPARATE.dat");
  R.reset();
- fstream fileD;
- fileD.open("Ddata.dat",ios::out | ios::in | ios::binary);
+ fstream file;
+ file.open("Ddata.dat",ios::out | ios::in | ios::binary);
  int k=101;
  while(k<121)
  {
 	D.room_no=k;
 	for(int i=0;i<12;i++)
 	 for(int j=0;j<31;j++)
-    D.mon[i][j]='N';
-  k++;
-	fileD.write((char*)&D,sizeof(D));
+		D.mon[i][j]='N';
+	k++;
+	file.write((char*)&D,sizeof(D));
  }
+ file.close();
+ struct food
+ {
+	char foodname[30];
+	float price;
+ }F;
+ char food[20][30];
+
+ ofstream FileB;
+ FileB.open("Bfast.txt",ios::app);
+ strcpy(food[0],"Dosa");
+ strcpy(food[1],"Idli");
+ strcpy(food[2],"Putt");
+ strcpy(food[3],"Salt Mango Tree");
+ strcpy(food[4],"Bacon");
+ strcpy(food[5],"Bhatoora");
+ strcpy(food[6],"Poori");
+ strcpy(food[7],"Sandwich");
+ strcpy(food[8],"Cream Pie");
+ strcpy(food[9],"French Toast");
+ for(int i=0;i<10;i++)
+ {
+	strcpy(F.foodname,food[i]);
+	F.price=90.0+random(i);
+ }
+ FileB.close();
+
+ ofstream FileL;
+ FileL.open("Lunch.txt", ios::app);
+ strcpy(food[0],"Chicken Biryani");
+ strcpy(food[1],"Vegetable Biryani");
+ strcpy(food[2],"Fried Rice");
+ strcpy(food[3],"Rice");
+ strcpy(food[4],"Fish Biryani");
+ strcpy(food[5],"Chicken Curry");
+ strcpy(food[6],"Chicken Club Twister");
+ strcpy(food[7],"Thali");
+ strcpy(food[8],"Veggie Frittata");
+ strcpy(food[9],"Asparagus Salad");
+ for(i=0;i<10;i++)
+ {
+	strcpy(F.foodname,food[i]);
+	F.price=100.0+random(i);
+ }
+ FileL.close();
+
+ ofstream FileD;
+ FileD.open("Dinner.txt",ios::app);
+ strcpy(food[0],"Skewers");
+ strcpy(food[1],"Vegetable Chow Mein");
+ strcpy(food[2],"Key Lime Pie");
+ strcpy(food[3],"Tropical Fruit Bowl");
+ strcpy(food[4],"Spaghetti");
+ strcpy(food[5],"Chicken Pizza");
+ strcpy(food[6],"Vegetable Pizza");
+ strcpy(food[7],"Taco Salad");
+ strcpy(food[8],"Basil Meatballs");
+ strcpy(food[9],"Roasted Chicken");
+ for(i=0;i<10;i++)
+ {
+	strcpy(F.foodname,food[i]);
+	F.price=95.0+random(i);
+ }
+ FileD.close();
+
+ ofstream FileDe;
+ FileDe.open("Dessert.txt",ios::app);
+ strcpy(food[0],"Butter Braid");
+ strcpy(food[1],"Cool Whip");
+ strcpy(food[2],"Apple Cake");
+ strcpy(food[3],"Cherry Sheet Cake");
+ strcpy(food[4],"Nectarine Tarts");
+ strcpy(food[5],"Ice Cream(M/C/S/V/B");
+ strcpy(food[6],"Fruit Salad");
+ strcpy(food[7],"Pudding");
+ strcpy(food[8],"Pie");
+ strcpy(food[9],"Carrot Halwa");
+ for(i=0;i<10;i++)
+ {
+	strcpy(F.foodname,food[i]);
+	F.price=70.0+random(i);
+ }
+ FileD.close();
+
+ ofstream FileS;
+ FileS.open("Snacks.txt",ios::app);
+ strcpy(food[0],"Samosa");
+ strcpy(food[1],"Banana Fry");
+ strcpy(food[2],"Chips");
+ strcpy(food[3],"Muffins");
+ strcpy(food[4],"Cookies");
+ strcpy(food[5],"French Fries");
+ strcpy(food[6],"Bread");
+ for(i=0;i<7;i++)
+ {
+	strcpy(F.foodname,food[i]);
+	F.price=20.0+random(i);
+ }
+
+ ofstream FileDr;
+ FileDr.open("Drinks.txt",ios::app);
+ strcpy(food[0],"Tea");
+ strcpy(food[1],"Coffee");
+ strcpy(food[2],"Water");
+ strcpy(food[3],"Cool Drinks");
+ strcpy(food[4],"Ice Cream");
+ strcpy(food[5],"Energy Drinks");
+ strcpy(food[6],"Juice");
+ strcpy(food[7],"Milk Shake");
+ strcpy(food[8],"Soda");
+ strcpy(food[9],"Lime Water");
+ for(i=0;i<10;i++)
+ {
+	strcpy(F.foodname,food[i]);
+	F.price=50.0+random(i);
+ }
+ FileDr.close();
 }
 void logo(int x)
 {
