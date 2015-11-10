@@ -1,4 +1,4 @@
-char newpass[20],  cdate[32][13], word[20];;
+char newpass[20],cdate[32][13],word[20];
 int m=4;
 #include<iostream.h>
 #include<conio.h>
@@ -11,6 +11,17 @@ int m=4;
 #include<ctype.h>
 #include<process.h>
 #include<string.h>
+void facilities();
+void Breakfast();
+void Lunch();
+void Dinner();
+void Snacks();
+void Dessert();
+void Drinks();
+void restfac();
+void roomfac();
+void loading2();
+void main_menu();
 void reset();
 void Custdata();
 void check();
@@ -56,6 +67,11 @@ struct date
  int room_no;
  char mon[12][31];
 }D;
+struct food
+{
+ char foodname[30];
+ int price;
+}F;
 class Room
 {
  int roomno;
@@ -70,6 +86,20 @@ class Room
 	int retfare()
 	{
 	 return fare;
+	}
+	void show(int y)
+	{
+	 gotoxy(3,y);
+	 cout<<roomno;
+	 gotoxy(25,y);
+	 cout<<roomtype;
+	 gotoxy(45,y);
+	 if(ac==0)
+	 cout<<"Non-AC \t";
+	 else
+	 cout<<"AC \t";
+	 gotoxy(70,y);
+	 cout<<fare;
 	}
 	void reset();
 }R;
@@ -110,7 +140,7 @@ void Room::reset()
 	 }
 	 file.write((char*)&R,sizeof(R));
 	}
-	if(roomno>=108 && roomno<=112)
+	if(roomno>108 && roomno<=112)
 	{
 	 strcpy(roomtype,"Deluxe");
 	 if(roomno%2==0)
@@ -125,14 +155,14 @@ void Room::reset()
 	 }
 	 file.write((char*)&R,sizeof(R));
 	}
-	if(roomno>=112 && roomno<=116)
+	if(roomno>112 && roomno<=116)
 	{
 	 strcpy(roomtype,"Twin Double");
 	 ac=1;
 	 fare=1500;
 	 file.write((char*)&R,sizeof(R));
 	}
-	if(roomno>=116 && roomno<=120)
+	if(roomno>116 && roomno<=120)
 	{
 	 strcpy(roomtype,"King Size");
 	 ac=1;
@@ -309,7 +339,7 @@ void login()
  }
  for(i=1,j=25;i<13,j>12;i++,j--)
  {
-  gotoxy(1,j);
+	gotoxy(1,j);
 	cout<<"";
   gotoxy(79,i);
 	cout<<"";
@@ -331,13 +361,13 @@ void login()
     cout<<"";
 		if(j==3)
 		{
-     if(i==40 || i==41 || i==42 || i==44 || i==45 || i==46)
+		 if(i==40 || i==41 || i==42 || i==44 || i==45 || i==46)
 		 {
 	 cout<<"";
-     }
+		 }
 		}
     if(j==9)
-    {
+		{
      if(i==39 || i==40 || i==41 || i==42 || i==44 || i==45 || i==46)
 		 {
 			cout<<" ";
@@ -349,7 +379,7 @@ void login()
 		 else
 		 cout<<" ";
     }
-    else
+		else
     cout<<" ";
    }
 	 else if(j==4 || j==5 || j==7 || j==8)
@@ -359,7 +389,7 @@ void login()
 	cout<<"";
 		}
 		else
-    cout<<" ";
+		cout<<" ";
 	 }
 	 else if(j==6)
 	 {
@@ -374,17 +404,17 @@ void login()
 		else
     cout<<" ";
    }
-   else if(j==12)
+	 else if(j==12)
    {
     if(i==36)
     cout<<"W";
     if(i==37 || i==42)
 		cout<<"E";
 		if(i==38)
-    cout<<"L";
+		cout<<"L";
 		if(i==39)
     cout<<"C";
-    if(i==40 || i==45)
+		if(i==40 || i==45)
 		cout<<"O";
     if(i==41)
 		cout<<"M";
@@ -670,12 +700,12 @@ void entry()
 	 gotoxy(w,z);
 	 cout<<" ";
   }
-  if(m>0)
+	if(m>0)
 	{
    cout<<'\a';
 	 gotoxy(5,9);
-   if(m==3)
-   {
+	 if(m==3)
+	 {
 		cout<<"No.of tries remaining!";
     gotoxy(3,10);
 		cout<<"          * *   ";
@@ -684,7 +714,7 @@ void entry()
 		gotoxy(3,12);
     cout<<"             *  ";
     gotoxy(3,13);
-    cout<<"            *   ";
+		cout<<"            *   ";
 		gotoxy(3,14);
 		cout<<"             *  ";
 		gotoxy(3,15);
@@ -695,11 +725,11 @@ void entry()
 	 if(m==2)
    {
     cout<<"No.of tries remaining!";
-    gotoxy(3,10);
+		gotoxy(3,10);
 		cout<<"                   ";
 		gotoxy(3,11);
 		cout<<"           * *     ";
-    gotoxy(3,12);
+		gotoxy(3,12);
 		cout<<"          *   *    ";
     gotoxy(3,13);
 		cout<<"          *   *    ";
@@ -709,10 +739,10 @@ void entry()
 		cout<<"            *      ";
 		gotoxy(3,16);
     cout<<"          *****    ";
-   }
+	 }
 	 if(m==1)
    {
-    cout<<"No.of tries remaining!";
+		cout<<"No.of tries remaining!";
 		gotoxy(3,10);
     cout<<"                   ";
     gotoxy(3,11);
@@ -724,7 +754,7 @@ void entry()
 		gotoxy(3,14);
     cout<<"            *      ";
 		gotoxy(3,15);
-    cout<<"            *      ";
+		cout<<"            *      ";
 		gotoxy(3,16);
 		cout<<"           ***     ";
 	 }
@@ -762,7 +792,7 @@ void load()
  int k=31;
  for(int i=0;i<101;i++)
  {
-  for(int j=0;j<10;j++)
+	for(int j=0;j<10;j++)
   {
 	 if(i<100)
    {
@@ -795,12 +825,12 @@ void load()
  {
 	if(kbhit())
 	{
-   a=getch();
+	 a=getch();
 	 if(a==13)
 	 break;
 	}
 	if(b<5)
-  {
+	{
 	 gotoxy(33,12);
 	 cout<<"Loading...";
    PrintCircle(38,12);
@@ -1400,6 +1430,8 @@ void choice()                                      //RECEIPTIONIST Choice
 	 }
 	 if(x==1)
 	 {
+		facilities();
+		goto first;
 	 }
 	 if(x==2)
 	 {
@@ -1407,60 +1439,60 @@ void choice()                                      //RECEIPTIONIST Choice
 	 }
 	 if(x==3)
 	 {
+		goto first;
 	 }
 	 if(x==4)
 	 {
-	  clrscr();
-	  ifstream file;
+		clrscr();
+		ifstream file;
 		file.open("Cdata.dat",ios::in | ios::binary);
 		gotoxy(8,1);
-	  cout<<"NAME ";
-	  gotoxy(30,1);
-	  cout<<"GENDER";
+		cout<<"NAME ";
+		gotoxy(30,1);
+		cout<<"GENDER";
 		gotoxy(46,1);
 		cout<<"DATE";
-	  gotoxy(59,1);
-	  cout<<"AMOUNT";
+		gotoxy(59,1);
+		cout<<"AMOUNT";
 		gotoxy(70,1);
 		cout<<"MEMBERS";
-	  int y=3,z=0;
-	  char k;
-	  long pos;
-	  while(file.read((char*)&C,sizeof(C)))
-	  {
-	   pos=file.tellg();
-	   if(y-1<21)
-	   C.dispdata(y++);
-		 else
-	   {
-			k=getch();
-	    if(k=='s' || k=='S')
-	    {
-		clrscr();
-		z++;
-		y=3;
-		C.dispdata(y++);
-	    }
-	    else if(k=='w' || k=='W')
-			{
-		if(z>0)
+		int y=3,z=0;
+		char k;
+		long pos;
+		while(file.read((char*)&C,sizeof(C)))
 		{
-		 clrscr();
-		 z++;
-		 y=3;
-		 file.seekg(pos-20*sizeof(C));
+		 pos=file.tellg();
+		 if(y-1<21)
 		 C.dispdata(y++);
-		}
-	    }
+		 else
+		 {
+			k=getch();
+			if(k=='s' || k=='S')
+			{
+			 clrscr();
+			 z++;
+			 y=3;
+			 C.dispdata(y++);
+			}
+			else if(k=='w' || k=='W')
+			{
+			 if(z>0)
+			 {
+				clrscr();
+				z++;
+				y=3;
+				file.seekg(pos-20*sizeof(C));
+				C.dispdata(y++);
+			 }
+			}
 		 }
 		}
-	  getch();
-	  goto first;
+		getch();
 	 }
 	 if(x==5)
 	 {
-	  randomize();
-	  int j=0,k=0;
+		randomize();
+		int j=0,k=0;
 		for(int i=0;i<10000;i++)
 		{
 		j=random(79+1);
@@ -1468,13 +1500,13 @@ void choice()                                      //RECEIPTIONIST Choice
 		gotoxy(j,k);
 		cout<<"*";;
 		delay();
-	  }
-	  gotoxy(1,1);
+		}
+		gotoxy(1,1);
 		for(i=0;i<1999;i++)
-    {
+		{
 		 cout<<"*";;
 		}
-    stop();
+		stop();
     stop();
 		stop();
 		goto first;
@@ -1514,6 +1546,12 @@ void Custdata()
 }
 void reset()
 {
+ remove("Bfast.txt");
+ remove("Lunch.txt");
+ remove("Dinner.txt");
+ remove("Snacks.txt");
+ remove("Dessert.txt");
+ remove("Drinks.txt");
  remove("Cdata.dat");
  remove("Rdata.dat");
  remove("done.dat");
@@ -1535,12 +1573,12 @@ void reset()
  struct food
  {
 	char foodname[30];
-	float price;
+	int price;
  }F;
  char food[20][30];
 
  ofstream FileB;
- FileB.open("Bfast.txt",ios::app);
+ FileB.open("Bfast.txt",ios::app | ios::binary);
  strcpy(food[0],"Dosa");
  strcpy(food[1],"Idli");
  strcpy(food[2],"Putt");
@@ -1554,12 +1592,13 @@ void reset()
  for(int i=0;i<10;i++)
  {
 	strcpy(F.foodname,food[i]);
-	F.price=90.0+random(i);
+	F.price=50+random(i);
+	FileB.write((char*)&F,sizeof(F));
  }
  FileB.close();
 
  ofstream FileL;
- FileL.open("Lunch.txt", ios::app);
+ FileL.open("Lunch.txt", ios::app | ios::binary);
  strcpy(food[0],"Chicken Biryani");
  strcpy(food[1],"Vegetable Biryani");
  strcpy(food[2],"Fried Rice");
@@ -1573,12 +1612,13 @@ void reset()
  for(i=0;i<10;i++)
  {
 	strcpy(F.foodname,food[i]);
-	F.price=100.0+random(i);
+	F.price=100+random(i);
+	FileL.write((char*)&F,sizeof(F));
  }
  FileL.close();
 
  ofstream FileD;
- FileD.open("Dinner.txt",ios::app);
+ FileD.open("Dinner.txt",ios::app | ios::binary);
  strcpy(food[0],"Skewers");
  strcpy(food[1],"Vegetable Chow Mein");
  strcpy(food[2],"Key Lime Pie");
@@ -1592,12 +1632,13 @@ void reset()
  for(i=0;i<10;i++)
  {
 	strcpy(F.foodname,food[i]);
-	F.price=95.0+random(i);
+	F.price=95+random(i);
+	FileD.write((char*)&F,sizeof(F));
  }
  FileD.close();
 
  ofstream FileDe;
- FileDe.open("Dessert.txt",ios::app);
+ FileDe.open("Dessert.txt",ios::app | ios::binary);
  strcpy(food[0],"Butter Braid");
  strcpy(food[1],"Cool Whip");
  strcpy(food[2],"Apple Cake");
@@ -1611,12 +1652,13 @@ void reset()
  for(i=0;i<10;i++)
  {
 	strcpy(F.foodname,food[i]);
-	F.price=70.0+random(i);
+	F.price=70+random(i);
+	FileDe.write((char*)&F,sizeof(F));
  }
  FileD.close();
 
  ofstream FileS;
- FileS.open("Snacks.txt",ios::app);
+ FileS.open("Snacks.txt",ios::app | ios::binary);
  strcpy(food[0],"Samosa");
  strcpy(food[1],"Banana Fry");
  strcpy(food[2],"Chips");
@@ -1627,11 +1669,12 @@ void reset()
  for(i=0;i<7;i++)
  {
 	strcpy(F.foodname,food[i]);
-	F.price=20.0+random(i);
+	F.price=20+random(i);
+	FileS.write((char*)&F,sizeof(F));
  }
 
  ofstream FileDr;
- FileDr.open("Drinks.txt",ios::app);
+ FileDr.open("Drinks.txt",ios::app | ios::binary);
  strcpy(food[0],"Tea");
  strcpy(food[1],"Coffee");
  strcpy(food[2],"Water");
@@ -1645,7 +1688,8 @@ void reset()
  for(i=0;i<10;i++)
  {
 	strcpy(F.foodname,food[i]);
-	F.price=50.0+random(i);
+	F.price=50+random(i);
+	FileDr.write((char*)&F,sizeof(F));
  }
  FileDr.close();
 }
@@ -1748,8 +1792,8 @@ void logo(int x)
 	cout<<"|*....|";
 	gotoxy(35,15);
 	cout<<"|_____|";
-    }
-    if(x==5)
+		}
+		if(x==5)
 		{
 	gotoxy(35,8);
 	cout<<" ______    ";
@@ -1859,4 +1903,362 @@ void show()
 	 }
 	 getch();
  }
+}
+void loading2()
+{
+ randomize();
+ clrscr();
+ gotoxy(31,13);
+ cout<<"LOADING...";
+ gotoxy(29,15);
+ cout<<"|";
+ gotoxy(29,14);
+ cout<<" ___________";
+ gotoxy(29,16);
+ cout<<" -----------";
+ gotoxy(41,15);
+ cout<<"|";
+ int q=random(4)+1;
+ for(int j=0;j<q;j++)
+ for(int i=30;i<=40;i++)
+ {
+	if(i>30 && i<40)
+	{
+	 gotoxy(i-1,15);
+	 cout<<" ";
+	 gotoxy(i,15);
+	 cout<<"*";
+	 gotoxy(i+1,15);
+	 cout<<"*";
+	 grey(10000000);
+	}
+	if(i==40)
+	{
+	 gotoxy(i-1,15);
+	 cout<<" ";
+	 gotoxy(i,15);
+	 cout<<" ";
+	 grey(10000000);
+	}
+ }
+ clrscr();
+}
+void roomfac()             //diplay room facilities
+{
+ int i=0;
+ clrscr();
+ cout<<"Room Facilities"<<endl;
+ gotoxy(2,2);
+ cout<<"Room No.";
+ gotoxy(24,2);
+ cout<<"Room Type";
+ gotoxy(43,2);
+ cout<<"AC/ Non-AC";
+ gotoxy(69,2);
+ cout<<"Amount";
+ ifstream file;
+ file.open("Rdata.dat",ios::in | ios::binary);
+ while(file.read((char*)&R,sizeof(R)))
+ {
+	if(i%4==0)
+	getch();
+	R.show(i+3);
+	cout<<endl;
+	i++;
+ }
+}
+void restfac()                  //display restaurent facilities
+{
+ char ch,c;
+ gotoxy(20,0);
+ cout<<"-------RESTAURENT FACILITIES-------";
+ gotoxy(2,3);
+ cout<<"Breakfast";
+ gotoxy(2,4);
+ cout<<"Lunch";
+ gotoxy(2,5);
+ cout<<"Dinner";
+ gotoxy(2,6);
+ cout<<"Snacks";
+ gotoxy(2,7);
+ cout<<"Dessert";
+ gotoxy(2,8);
+ cout<<"Drinks";
+ gotoxy(30,24);
+ cout<<"Press 'M'-Facilities ";
+ int r=3;
+ gotoxy(1,r);
+ cout<<">";
+ back:
+ ch=getch();
+ if(ch=='w' || ch=='W')
+ {
+	r--;
+	if(r<3)
+	{
+	 gotoxy(1,r+1);
+	 cout<<" ";
+	 r=8;
+	 gotoxy(1,r);
+	 cout<<">";
+	 goto back;
+	}
+	else
+	{
+	 gotoxy(1,r+1);
+	 cout<<" ";
+	 gotoxy(1,r);
+	 cout<<">";
+	 goto back;
+	}
+ }
+ else if(ch=='s' || ch=='S')
+ {
+	r++;
+	if(r>8)
+	{
+	 gotoxy(1,r-1);
+	 cout<<" ";
+	 r=3;
+	 gotoxy(1,r);
+	 cout<<">";
+	 goto back;
+	}
+	else
+	{
+	 gotoxy(1,r-1);
+	 cout<<" ";
+	 gotoxy(1,r);
+	 cout<<">";
+	 goto back;
+	}
+ }
+ else if(ch==13)
+ {
+	if(r==3)
+	{
+	 clrscr();
+	 Breakfast();
+	}
+	else if(r==4)
+	{
+	 clrscr();
+	 Lunch();
+	}
+	else if(r==5)
+	{
+	 clrscr();
+	 Dinner();
+	}
+	else if(r==6)
+	{
+	 clrscr();
+	 Snacks();
+	}
+	else if(r==7)
+	{
+	 clrscr();
+	 Dessert();
+	}
+	else if(r==8)
+	{
+	 clrscr();
+	 Drinks();
+	}
+	gotoxy(20,24);
+	cout<<"Press 'M'-Facilities | Press 'B'-Food Menu ";
+ }
+ else if(ch=='M' || ch=='m')
+ {
+	facilities();
+ }
+ c=getch();
+ clrscr();
+ if(c=='b' || c=='B')
+ {
+	restfac();
+ }
+ if(c=='m' || c=='M')
+ {
+	facilities();
+ }
+ else
+ {
+	choice();
+ }
+}
+void Breakfast()
+{
+ int i=1;
+ ifstream file;
+ file.open("Bfast.txt",ios::in | ios::binary);
+ while(file.read((char*)&F,sizeof(F)))
+ {
+	gotoxy(1,i+2);
+	cout<<F.foodname;
+	gotoxy(50,i+2);
+	cout<<F.price;
+	i++;
+ }
+ file.close();
+}
+void Lunch()
+{
+ int i=1;
+ ifstream file;
+ file.open("Lunch.txt",ios::in | ios::binary);
+ while(file.read((char*)&F,sizeof(F)))
+ {
+	gotoxy(1,i+2);
+	cout<<F.foodname;
+	gotoxy(50,i+2);
+	cout<<F.price;
+	i++;
+ }
+ file.close();
+}
+void Dinner()
+{
+ int i=1;
+ ifstream file;
+ file.open("Dinner.txt",ios::in | ios::binary);
+ while(file.read((char*)&F,sizeof(F)))
+ {
+	gotoxy(1,i+2);
+	cout<<F.foodname;
+	gotoxy(50,i+2);
+	cout<<F.price;
+	i++;
+ }
+ file.close();
+}
+void Dessert()
+{
+ int i=1;
+ ifstream file;
+ file.open("Dessert.txt",ios::in | ios::binary);
+ while(file.read((char*)&F,sizeof(F)))
+ {
+	gotoxy(1,i+2);
+	cout<<F.foodname;
+	gotoxy(50,i+2);
+	cout<<F.price;
+	i++;
+ }
+ file.close();
+}
+void Snacks()
+{
+ int i=1;
+ ifstream file;
+ file.open("Snacks.txt",ios::in | ios::binary);
+ while(file.read((char*)&F,sizeof(F)))
+ {
+	gotoxy(1,i+2);
+	cout<<F.foodname;
+	gotoxy(50,i+2);
+	cout<<F.price;
+	i++;
+ }
+ file.close();
+}
+void Drinks()
+{
+ int i=1;
+ ifstream file;
+ file.open("Drinks.txt",ios::in | ios::binary);
+ while(file.read((char*)&F,sizeof(F)))
+ {
+	gotoxy(1,i+2);
+	cout<<F.foodname;
+	gotoxy(50,i+2);
+	cout<<F.price;
+	i++;
+ }
+ file.close();
+}
+void facilities()
+{
+ clrscr();
+ gotoxy(30,1);
+ cout<<"--------FACILITIES--------";
+ gotoxy(2,3);
+ cout<<"ROOM FACILITIES";
+ gotoxy(2,4);
+ cout<<"RESTAURENTS";
+ gotoxy(2,5);
+ cout<<"RETURN";
+ char ch;
+ int k=3;
+ gotoxy(1,k);
+ cout<<">";
+ back:
+ ch=getch();
+ if(ch=='w' || ch=='W')
+ {
+	k--;
+	if(k<3)
+	{
+	 gotoxy(1,k+1);
+	 cout<<" ";
+	 k=6;
+	 gotoxy(1,k);
+	 cout<<">";
+	 goto back;
+	}
+	else
+	{
+	 gotoxy(1,k+1);
+	 cout<<" ";
+	 gotoxy(1,k);
+	 cout<<">";
+	 goto back;
+	}
+ }
+ else if(ch=='s' || ch=='S')
+ {
+	k++;
+	if(k>5)
+	{
+	 gotoxy(1,k-1);
+	 cout<<" ";
+	 k=3;
+	 gotoxy(1,k);
+	 cout<<">";
+	 goto back;
+	}
+	else
+	{
+	 gotoxy(1,k-1);
+	 cout<<" ";
+	 gotoxy(1,k);
+	 cout<<">";
+	 goto back;
+	}
+ }
+ else if(ch==13)
+ {
+	clrscr();
+	if(k==3)
+	{
+	 loading2();
+	 roomfac();
+	}
+	else if(k==4)
+	{
+	 loading2();
+	 restfac();
+	}
+	else if(k==5)
+	{
+	 choice();
+	}
+ }
+ gotoxy(20,25);
+ cout<<"Press 'B'-Facility | Else-Main Menu";
+ ch=getch();
+ if(ch=='b' || ch=='B')
+ facilities();
+ else
+ return;
 }
