@@ -11,6 +11,7 @@ int m=4;
 #include<ctype.h>
 #include<process.h>
 #include<string.h>
+void checkout();
 void facilities();
 void Breakfast();
 void Lunch();
@@ -192,20 +193,38 @@ class Customer
 	{
 	 return cfname;
 	}
+	int retsdate()
+	{
+	 return sdate;
+	}
+	int retedate()
+	{
+	 return edate;
+	}
+	int retsmon()
+	{
+	 return smon;
+	}
+	int retemon()
+	{
+	 return emon;
+	}
 	int retroom();
 	void retddate();
 	void getinfo(int,int,int,int,int);
 	void dispdata(int y)
 	{
-	 gotoxy(1,y);
+	 gotoxy(3,y);
+	 cout<<roomno;
+	 gotoxy(15,y);
 	 cout<<cfname<<" "<<clname;
-	 gotoxy(33,y);
+	 gotoxy(38,y);
 	 cout<<gender;
-	 gotoxy(43,y);
+	 gotoxy(48,y);
 	 cout<<sdate+1<<'/'<<smon+1<<'-'<<edate+1<<'/'<<emon+1;
-	 gotoxy(61,y);
+	 gotoxy(63,y);
 	 cout<<tot_fare;
-	 gotoxy(73,y);
+	 gotoxy(75,y);
 	 cout<<nomember;
 	}
 	void show();
@@ -316,7 +335,7 @@ void login()
 	gotoxy(l,k);
 	cout<<random(9);
 	gotoxy(j,i);
-  cout<<random(9);
+	cout<<random(9);
 	gotoxy(l,i);
   cout<<random(9);
 	slow();
@@ -325,7 +344,7 @@ void login()
  {
   gotoxy(1,i);
   cout<<"";
-  gotoxy(79,j);
+	gotoxy(79,j);
 	cout<<"";
 	delay2();
  }
@@ -333,7 +352,7 @@ void login()
  {
   gotoxy(i,1);
 	cout<<"";
-  gotoxy(j,25);
+	gotoxy(j,25);
 	cout<<"";
 	delay1();
  }
@@ -341,7 +360,7 @@ void login()
  {
 	gotoxy(1,j);
 	cout<<"";
-  gotoxy(79,i);
+	gotoxy(79,i);
 	cout<<"";
 	delay2();
  }
@@ -350,7 +369,7 @@ void login()
  {
 	for(j=2;j<=24;j++)
   {
-   gotoxy(i,j);
+	 gotoxy(i,j);
 	 if(j==3 || j==9)
 	 {
 		if(i==24 || i==30 || i==32 || i==33 || i==34 || i==35 || i==36 || i==37 || i==38)
@@ -358,7 +377,7 @@ void login()
     if(i==43 || i==48 || i==49 || i==50 || i==51 || i==52 || i==53)
     cout<<"";
 		if(i==54 || i==56)
-    cout<<"";
+		cout<<"";
 		if(j==3)
 		{
 		 if(i==40 || i==41 || i==42 || i==44 || i==45 || i==46)
@@ -366,7 +385,7 @@ void login()
 	 cout<<"";
 		 }
 		}
-    if(j==9)
+		if(j==9)
 		{
      if(i==39 || i==40 || i==41 || i==42 || i==44 || i==45 || i==46)
 		 {
@@ -400,7 +419,7 @@ void login()
 		if(i==49 || i==50 || i==51 || i==52 || i==56)
 		{
 		 cout<<"";
-    }
+		}
 		else
     cout<<" ";
    }
@@ -408,7 +427,7 @@ void login()
    {
     if(i==36)
     cout<<"W";
-    if(i==37 || i==42)
+		if(i==37 || i==42)
 		cout<<"E";
 		if(i==38)
 		cout<<"L";
@@ -416,7 +435,7 @@ void login()
     cout<<"C";
 		if(i==40 || i==45)
 		cout<<"O";
-    if(i==41)
+		if(i==41)
 		cout<<"M";
 		if(i==44)
 		cout<<"T";
@@ -450,7 +469,7 @@ void login()
 	 cout<<" ";
   }
   grey(4250000);
-  gotoxy(36,11);
+	gotoxy(36,11);
  }
  stop();
  stop();
@@ -541,7 +560,7 @@ void entry()
  }
  if(ch==13)
  {
-  goto bleh;
+	goto bleh;
  }
  else
  {
@@ -683,7 +702,7 @@ void entry()
 	   found=1;
 	   Custdata();
 	   exit(0);
-	  }
+		}
 	 }
 	 if(found==0)
 	 {
@@ -720,7 +739,7 @@ void entry()
 		gotoxy(3,15);
     cout<<"         *   *  ";
 		gotoxy(3,16);
-    cout<<"          * *   ";
+		cout<<"          * *   ";
 	 }
 	 if(m==2)
    {
@@ -741,11 +760,11 @@ void entry()
     cout<<"          *****    ";
 	 }
 	 if(m==1)
-   {
+	 {
 		cout<<"No.of tries remaining!";
 		gotoxy(3,10);
     cout<<"                   ";
-    gotoxy(3,11);
+		gotoxy(3,11);
 		cout<<"            *      ";
 		gotoxy(3,12);
 		cout<<"           **      ";
@@ -795,7 +814,7 @@ void load()
 	for(int j=0;j<10;j++)
   {
 	 if(i<100)
-   {
+	 {
 		gotoxy(42,15);
 		cout<<i<<"."<<j<<" %";
     slow();
@@ -808,7 +827,7 @@ void load()
 	}
   if(i%4==0)
   {
-   gotoxy(k,13);
+	 gotoxy(k,13);
 	 cout<<"";
 	 k++;
 	}
@@ -833,7 +852,7 @@ void load()
 	{
 	 gotoxy(33,12);
 	 cout<<"Loading...";
-   PrintCircle(38,12);
+	 PrintCircle(38,12);
 	}
 	else
 	{
@@ -1449,6 +1468,8 @@ void choice()                                      //RECEIPTIONIST Choice
 	 }
 	 if(x==2)
 	 {
+		clrscr();
+		checkout();
 		goto first;
 	 }
 	 if(x==3)
@@ -1460,15 +1481,17 @@ void choice()                                      //RECEIPTIONIST Choice
 		clrscr();
 		ifstream file;
 		file.open("Cdata.dat",ios::in | ios::binary);
-		gotoxy(8,1);
+		gotoxy(2,1);
+		cout<<"Room No";
+		gotoxy(19,1);
 		cout<<"NAME ";
-		gotoxy(30,1);
+		gotoxy(35,1);
 		cout<<"GENDER";
-		gotoxy(46,1);
+		gotoxy(50,1);
 		cout<<"DATE";
-		gotoxy(59,1);
+		gotoxy(62,1);
 		cout<<"AMOUNT";
-		gotoxy(70,1);
+		gotoxy(73,1);
 		cout<<"MEMBERS";
 		int y=3,z=0;
 		char k;
@@ -2276,4 +2299,123 @@ void facilities()
  facilities();
  else
  return;
+}
+void checkout()
+{
+ int sdate,edate,smon,emon,k;
+ long pos;
+ clrscr();
+ int found=0;
+ char name[20],pass[20],ans;
+ int rno;
+ clrscr();
+ cout<<"Enter the Room no  :";
+ cin>>rno;
+ cout<<"Enter the Name     :";
+ gets(name);
+ cout<<"Enter the Password :";
+ gets(pass);
+ fstream FileD;
+ FileD.open("Ddata.dat",ios::in | ios::out | ios::binary);
+ fstream FileC;
+ FileC.open("Cdata.dat",ios::in | ios::out | ios::binary);
+ ofstream FileT;
+ FileT.open("Ctemp.dat",ios::app | ios::binary);
+ while(FileC.read((char*)&C,sizeof(C)))
+ {
+	if(C.retroom()==rno)
+	if(strcmpi(C.retname(),name)==0 )
+	if(strcmpi(C.retpass(),pass)==0)
+	{
+	 found=1;
+	 C.show();
+	 cout<<endl<<"Confirm Deletion? ";
+	 ans=getche();
+	 if(ans=='y' || ans=='Y')
+	 {
+		sdate=C.retsdate();
+		edate=C.retedate();
+		smon=C.retsmon();
+		emon=C.retemon();
+		FileC.seekg(0);
+		while(FileC.read((char*)&C,sizeof(C)))
+		{
+		 if(strcmp(C.retname(),name)!=0)
+		 {
+			if(C.retroom()!=rno)
+			FileT.write((char*)&C,sizeof(C));
+		 }
+		 else
+		 {
+			if(C.retroom()==rno)
+			{
+			 for(int i=0;i<12;i++)
+			 for(int j=0;j<31;j++)
+			 cdate[i][j]=D.mon[i][j];
+			 while(FileD.read((char*)&D,sizeof(D)))
+			 {
+				pos=FileD.tellg();
+				if(D.room_no==rno)
+				{
+				 if(sdate<edate)
+				 {
+					k=sdate;
+					while(k<=edate)
+					{
+						cdate[smon][k]='N';
+						k++;
+					}
+				 }
+				 else if(sdate>edate)
+				 {
+					k=0;
+					while(k<=edate)
+					{
+					 cdate[emon][k]='N';
+					 k++;
+					}
+					k=sdate;
+					while(k<=30)
+					{
+						cdate[smon][k]='N';
+						k++;
+					}
+				 }
+				 for(int i=0;i<12;i++)
+				 for(int j=0;j<31;j++)
+				 D.mon[i][j]=cdate[i][j];
+				 FileD.seekp(pos-sizeof(D));
+				 FileD.write((char*)&D,sizeof(D));
+				}
+			 }
+			}
+		 }
+		}
+		cout<<endl<<endl<<'\t'<<"Room Vacated!";
+		remove("Cdata.dat");
+		rename("Ctemp.dat","Cdata.dat");
+	 }
+	 else
+	 {
+		cout<<endl<<"Room Not Vacated";
+		cout<<endl<<'\t'<<'\t';
+		cout<<"Do you wish to Vacate Another Room";
+		ans=getche();
+		if(ans=='y' || ans=='Y')
+		checkout();
+		else
+		choice();
+	 }
+	}
+ }
+ if(found==0)
+ {
+	cout<<"Unidentified Room/Name/Pass";
+	cout<<"Do you wish to Vacate Another Room";
+	ans=getche();
+	if(ans=='y' || ans=='Y')
+	checkout();
+	else
+	choice();
+ }
 }
